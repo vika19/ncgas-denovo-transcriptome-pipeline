@@ -1,6 +1,11 @@
-Any step that is followed by a "b", etc. (RunVelvet2b.sh or Step 2b) can be run at the same time as the matching number (RunVelvet.sh or Step2).
+Welcome to NCGAS's de Novo Transcriptome Workflow v4.0!
+-note: this version has added annotation with Trinotate.  This is currently incompatible with previous versions of complete assemblies - but stay tuned, a fix for this is in the works!
+
+Getting Started:
+Note: Any step that is followed by a "b", etc. (RunVelvet2b.sh or Step 2b) can be run at the same time as the matching number (RunVelvet.sh or Step2).
 
 Step 0:
+From the root directory (i.e. Project_Carbonate or ncgas_denovo_transcriptome_pipeline):
 You need to put your email as the point of contact for all the scripts.  This can be done en masse with the following command (replace youremail@wherever.com with your actual email) from the Project directory:
 for f in */Run*; do sed -i 's/YOUREMAILHERE/youremail@wherever.com/g' $f; done
 
@@ -59,3 +64,6 @@ within okayset, you will set two sets of files:
 		anything labeled "complete" is a full cds.
 
 SEE http://arthropods.eugenes.org/EvidentialGene/trassembly.html for documentaiton!
+
+Step 4: Prep for annotation
+Once you have completed Step 3, you will see files in the final_Assemblies/annotation folder.  See the README in that folder for instructions on how to continue preparing your files for annotation through Trinotate!
