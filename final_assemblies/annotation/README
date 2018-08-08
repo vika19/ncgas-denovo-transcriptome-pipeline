@@ -29,6 +29,6 @@ transcripts.main.renamed.aa  	the subset above, but with the final gene name add
 
 Trinotate.sqlite		the initialized annoatation database to be used ith Trinotate
 
-You should continue with the Trinotate steps, using the transcripts.main.fa and transcripts.main.aa files.  DO NOT continue with the *main.renamed* files, as these will not import into the database correctly.
+You should continue with the Trinotate steps, using the transcripts.main.fa and transcripts.reformated.aa files.  DO NOT continue with the *main.renamed* files, as these will not import into the database correctly.
 
 
