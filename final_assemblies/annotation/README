@@ -22,7 +22,7 @@ will result in loci being named "genenames02934", "genenames1", etc.
 After this runs, you will have an initialized Trinotate database.  You will now have the following files:
 combined.mainalt.tab      	a table listing the longest form (first column) and all alternate forms (remaining columns)
 genes_to_transcripts.tsv  	a table listing the final name of the gene and the different forms from the table above 
-transcripts.reformated.aa   a fasta of proteins that are in TransDecoder format, which is necessary for use in trinotate.
+transcripts.reformated.aa   a fasta of "main" proteins that are in TransDecoder format, which is necessary for use in trinotate.
 
 transcripts.fa       		the original okay and okalt files concatonated together
 transcripts.main.fa  		the subset of transcripts that represent UNIQUE main and alternate forms of genes
