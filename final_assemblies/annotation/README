@@ -7,17 +7,22 @@ transcripts.aa
 transcripts.fa  
 Trinotate.sqlite
 
-This is how you will know the previous step was completed fully.  Run the following if you see these files:
+This is how you will know the previous step was completed fully.  Edit the RunAnnotate.sh if you see these files:
 
-./Annotate.sh -p NAME_PREFIX
+where you see:
+name=
 
-where NAME_PREFIX is the final naming prefix you'd like for all your transcripts.  Please do not use any special characters here, such as ".".  
+add some sort of NAME_PREFIX, where NAME_PREFIX is the final naming prefix you'd like for all your transcripts.  Please do not use any special characters here, such as ".".  
 
 i.e. ./Annotate.sh -p genenames
 
-At this point you will have an initialized Trinotate database.  You will now have the following files:
+will result in loci being named "genenames02934", "genenames1", etc.
+
+
+After this runs, you will have an initialized Trinotate database.  You will now have the following files:
 combined.mainalt.tab      	a table listing the longest form (first column) and all alternate forms (remaining columns)
 genes_to_transcripts.tsv  	a table listing the final name of the gene and the different forms from the table above 
+transcripts.reformated.aa   a fasta of proteins that are in TransDecoder format, which is necessary for use in trinotate.
 
 transcripts.fa       		the original okay and okalt files concatonated together
 transcripts.main.fa  		the subset of transcripts that represent UNIQUE main and alternate forms of genes
