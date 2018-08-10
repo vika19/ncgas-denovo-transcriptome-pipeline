@@ -13,7 +13,7 @@ Trinotate Trinotate.sqlite LOAD_tmhmm tmhmm.out
 Trinotate Trinotate.sqlite LOAD_tmhmm signalp.out 
 Trinotate Trinotate.sqlite LOAD_rnammer transcripts.main.fa.rnammer.gff
 Trinotate Trinotate.sqlite LOAD_pfam PFAM.out
-Trinotate Trinotate.sqlite LOAD_swissprot_blastx blastx.out
-Trinotate Trinotate.sqlite LOAD_swissprot_blastp blastp.out
+Trinotate Trinotate.sqlite LOAD_swissprot_blastx blastx.outfmt6
+Trinotate Trinotate.sqlite LOAD_swissprot_blastp blastp.outfmt6
 
 Trinotate Trinotate.sqlite report > report.xls
