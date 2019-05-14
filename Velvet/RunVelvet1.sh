@@ -7,6 +7,8 @@
 ##Move to correct WD
 cd PWDHERE/Velvet
 
+source ../setup_files/kmers 
+
 ##load modules
 module load velvet/1.2.10
 module load oases/0.2.09
@@ -14,10 +16,6 @@ module load oases/0.2.09
 #input define
 right=PWDHERE/input_files/right-norm.fq
 left=PWDHERE/input_files/left-norm.fq
-
-k1=35
-k2=45
-k3=55
 
 ##run code
 velveth oases.$k1 $k1 -shortPaired -fastq -separate $left $right &

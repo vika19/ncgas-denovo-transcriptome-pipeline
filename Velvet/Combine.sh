@@ -1,10 +1,4 @@
-k1=35
-k2=45
-k3=55
-k4=65
-k5=75
-k6=85
-
+source ../setup_files/kmers 
 
 sed "s/>/>Velvet.$k1./g" oases.$k1/transcripts.fa | sed -E "s/>Velvet\.(.{2,3})\./>Velvet_\1_/g" | sed 's/\///g' > ../final_assemblies/Velvet.fa
 echo "$k1 done.."

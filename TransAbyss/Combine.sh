@@ -1,9 +1,4 @@
-k1=35
-k2=45
-k3=55
-k4=65
-k5=75
-k6=85
+source ../setup_files/kmers 
 
 sed "s/>/>TransAb.$k1./g" $k1.transabyss.fa-final.fa | sed -E "s/>TransAb\.(.{2,3})\./>TransAb_\1_/g" > ../final_assemblies/TransAb.fa
 echo "$k1 Done"

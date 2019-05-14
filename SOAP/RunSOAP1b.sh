@@ -10,9 +10,7 @@ cd PWDHERE/SOAP
 ##load modules
 module load soapdenovotrans/1.03
 
-k4=65
-k5=75
-k6=85
+source ../setup_files/kmers 
 
 ##run code
 SOAPdenovo-Trans-127mer all -s config_file -K $k4 -o output.$k4 &

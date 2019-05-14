@@ -1,9 +1,4 @@
-k1=35
-k2=45
-k3=55
-k4=65
-k5=75
-k6=85
+source ../setup_files/kmers 
 
 sed "s/>/>SOAP.$k1./g" output.$k1.scafSeq | sed -E "s/>SOAP\.(.{2,3}\./SOAP_\1_/g" > ../final_assemblies/SOAP.fa
 echo "$k1 done"
