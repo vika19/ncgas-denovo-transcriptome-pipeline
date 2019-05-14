@@ -15,6 +15,7 @@ fi
 #Set Defaults
 READLEN=150
 INSERT=400
+EMAIL="FAIL"
 K=35,45,55,65,75,85
 
 while getopts e:s:r:i:k:hcv option
@@ -42,10 +43,19 @@ v) echo "version: NCGAS transcriptome pipeline, v4(beta)"; exit 0;;
 esac
 done
 
+#Check for email
+if [ "$EMAIL" == "FAIL" ]; then
+   echo "Please specify an email with -e.  See help (-h) for more set up options."
+   exit 0;
+fi
+
 #Handle Kmers
 IFS=',' read -r -a array <<< "$K"; 
 if [ "${#array[@]}" != 6 ]; then 
    echo "Please supply exactly 6 kmers."
+   exit 0;
+elsif [ "$array[5]" >= $READLEN ]; then
+   echo "Please revise kmers, your last kmer is larger or equal to your readlength.  Please see help (-h) for information on defining readlength or kmers"
    exit 0;
 else 
      for f in ./setup_files/kmers; do sed -i "s/k1=.*/k1=${array[0]}/g" $f; sed -i "s/k2=.*/k2=${array[1]}/g" $f; sed -i "s/k3=.*/k3=${array[2]}/g" $f; sed -i "s/k4=.*/k4=${array[3]}/g" $f; sed -i "s/k5=.*/k5=${array[4]}/g" $f; sed -i "s/k6=.*/k6=${array[5]}/g" $f; done

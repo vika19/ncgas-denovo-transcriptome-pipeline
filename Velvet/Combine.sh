@@ -12,4 +12,4 @@ sed "s/>/>Velvet.$k5./g" oases.$k5/transcripts.fa | sed -E "s/>Velvet\.(.{2,3})\
 echo "$k5 done.."
 sed "s/>/>Velvet.$k6./g" oases.$k6/transcripts.fa | sed -E "s/>Velvet\.(.{2,3})\./>Velvet_\1_/g" | sed 's/\///g' >> ../final_assemblies/Velvet.fa
 echo "$k6 done.."
-
+echo "DONE"
