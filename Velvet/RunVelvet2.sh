@@ -5,7 +5,7 @@
 #PBS -l nodes=1:ppn=2,vmem=200gb,walltime=3:00:00
 
 ##Move to correct WD
-cd PWDHERE
+cd PWDHERE/Velvet
 
 ##load modules
 module load velvet/1.2.10

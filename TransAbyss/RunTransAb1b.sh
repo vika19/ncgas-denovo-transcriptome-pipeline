@@ -4,7 +4,7 @@
 #PBS -l nodes=1:ppn=10,walltime=12:00:00,vmem=100gb
 
 #set wd
-cd PWDHERE
+cd PWDHERE/TransAbyss
 
 module load transabyss/2.0.1
 module load igraph/python/0.7.1
