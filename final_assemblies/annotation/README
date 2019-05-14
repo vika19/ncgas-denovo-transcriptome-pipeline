@@ -7,22 +7,17 @@ transcripts.aa
 transcripts.fa  
 Trinotate.sqlite
 
-This is how you will know the previous step was completed fully.  Edit the RunAnnotate.sh if you see these files:
+This is how you will know the previous step was completed fully.  Run the following if you see these files:
 
-where you see:
-name=
+./Annotate.sh -p NAME_PREFIX
 
-add some sort of NAME_PREFIX, where NAME_PREFIX is the final naming prefix you'd like for all your transcripts.  Please do not use any special characters here, such as ".".  
+where NAME_PREFIX is the final naming prefix you'd like for all your transcripts.  Please do not use any special characters here, such as ".".  
 
 i.e. ./Annotate.sh -p genenames
 
-will result in loci being named "genenames02934", "genenames1", etc.
-
-
-After this runs, you will have an initialized Trinotate database.  You will now have the following files:
+At this point you will have an initialized Trinotate database.  You will now have the following files:
 combined.mainalt.tab      	a table listing the longest form (first column) and all alternate forms (remaining columns)
 genes_to_transcripts.tsv  	a table listing the final name of the gene and the different forms from the table above 
-transcripts.reformated.aa   a fasta of "main" proteins that are in TransDecoder format, which is necessary for use in trinotate.
 
 transcripts.fa       		the original okay and okalt files concatonated together
 transcripts.main.fa  		the subset of transcripts that represent UNIQUE main and alternate forms of genes
@@ -34,13 +29,7 @@ transcripts.main.renamed.aa  	the subset above, but with the final gene name add
 
 Trinotate.sqlite		the initialized annoatation database to be used ith Trinotate
 
-You should continue with the Trinotate steps, using the transcripts.main.fa and transcripts.reformated.aa files.  DO NOT continue with the *main.renamed* files, as these will not import into the database correctly.
+You should continue with the Trinotate steps, using the transcripts.main.fa and transcripts.main.aa files.  DO NOT continue with the *main.renamed* files, as these will not import into the database correctly.
 
-You can run these steps using the provided scripts:
-1) Run all RunTrintotate* scripts, except RunTrinotate_load.sh at the same time.  These compute all the different evidence for annotation and are not interdependent.
-2) Run RunTrinotate_load.sh.  This will load all finished information into your database and provide you with a report.xls - with a line for each transcript and annotation evidence found.
-3) If you want to pull specific columns, you will have to remove the spaces within the report - I usually do this with the following command:
-    sed 's/\ /_/g' report.xls > report.reformated.xls
 
-Then you go about filtering out things that look like contamination (help on that is in development) and getting a first look at what any differentially expressed genes might be!
-
+Trinotate manual: https://github.com/Trinotate/Trinotate.github.io/wiki
