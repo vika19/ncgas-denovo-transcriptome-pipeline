@@ -4,14 +4,15 @@
 #PBS -l nodes=1:ppn=10,walltime=12:00:00,vmem=100gb
 
 #set wd
-cd /N/dc2/projects/ncgas/scripts/transcriptome_pipeline/dev/SS_testing/test/TransAbyss
+cd PWDHERE
 
 module load transabyss/2.0.1
 module load igraph/python/0.7.1
 module load blat
 #run
-reads1=/N/dc2/projects/ncgas/scripts/transcriptome_pipeline/dev/SS_testing/test/input_files/left-norm.fq
-reads2=/N/dc2/projects/ncgas/scripts/transcriptome_pipeline/dev/SS_testing/test/input_files/right-norm.fq
+reads1=PWDHERE/input_files/left-norm.fq
+reads2=PWDHERE/input_files/right-norm.fq
+
 OD=`pwd`
 
 k4=65

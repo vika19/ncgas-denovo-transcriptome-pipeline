@@ -5,7 +5,7 @@
 #PBS -l nodes=1:ppn=4,vmem=128gb,walltime=24:00:00
 
 ##Move to correct WD
-cd /N/dc2/projects/ncgas/scripts/transcriptome_pipeline/dev/SS_testing/test/SOAP/
+cd PWDHERE
 
 ##load modules
 module load soapdenovotrans/1.03
