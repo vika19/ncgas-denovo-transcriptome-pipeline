@@ -1,7 +1,7 @@
 #PBS -k oe 
 #PBS -m abe
-#PBS -M YOUREMAILHERE
-#PBS -N RunSOAP2
+#PBS -M 
+#PBS -N RunSOAP1b
 #PBS -l nodes=2:ppn=4,vmem=128gb,walltime=24:00:00
 
 ##Move to correct WD

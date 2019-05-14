@@ -1,19 +1,30 @@
-Welcome to NCGAS's de Novo Transcriptome Workflow v4.0!
--note: this version has added annotation with Trinotate.  This is currently incompatible with previous versions of complete assemblies - but stay tuned, a fix for this is in the works!
-
-Getting Started:
-Note: Any step that is followed by a "b", etc. (RunVelvet2b.sh or Step 2b) can be run at the same time as the matching number (RunVelvet.sh or Step2).
+Any step that is followed by a "b", etc. (RunVelvet2b.sh or Step 2b) can be run at the same time as the matching number (RunVelvet.sh or Step2).
 
 Step 0:
-From the root directory (i.e. Project_Carbonate or ncgas_denovo_transcriptome_pipeline):
-You need to put your email as the point of contact for all the scripts.  This can be done en masse with the following command (replace youremail@wherever.com with your actual email) from the Project directory:
-for f in */Run*; do sed -i 's/YOUREMAILHERE/youremail@wherever.com/g' $f; done
+You will need to run the start up script to set up your email, project location, and designate if you are using single or double strands.  This can be done with the following command:
 
-You will also need to map your project directory to the run files.  To do this, run the following from the Project directory:
-for f in */*; do p=`pwd`; sed -i "s|PWDHERE|$p|g" $f ; done
+  Setup.ba -e <your email> -s <single or double> -r <read length> -i <insert size if double>
+
+For example:
+
+  Setup.ba -e student@university.edu -s double -r 150 -i 400
+  Setup.ba -e student@university.edu -s single -r 
+  Setup.ba -e student@university.edu -s single  #will have a read length of 150 by default
+  Setup.ba -e student@university.edu -s double  #will have a read length of 150 and insert size of 400 by default
+
+You can also get help by using:
+
+  Setup.ba -h
+
+You can get citations for all software by using:
+
+  Setup.ba -c
+
+NOTE: You can change your email and strand setting several times, but the current working directory will only be run the first time.  As long as you don't move the directory, this will not cause any issues.
+Also, this step can take a bit of time, and you can ignore any sed related errors - that is expected at this time!
 
 Step 1:
-Put all your reads into input_files
+Put all your reads into input_files - DO THIS AFTER STEP 0! Otherwise it will take forever!
 Read the README in input_files to get instructions for combining reads properly into input files.
 You can do this with symlink (use command "man ln" if you are unfamiliar with this command).
 
@@ -65,5 +76,5 @@ within okayset, you will set two sets of files:
 
 SEE http://arthropods.eugenes.org/EvidentialGene/trassembly.html for documentaiton!
 
-Step 4: Prep for annotation
-Once you have completed Step 3, you will see files in the final_Assemblies/annotation folder.  See the README in that folder for instructions on how to continue preparing your files for annotation through Trinotate!
+Step 4:
+You can continue downstream analysis with the README's in final_assemblies, for annotation, DE, QC (in dev), and using this version with data generated from previous versions of the pipeline!

@@ -1,6 +1,6 @@
 #PBS -k oe 
 #PBS -m abe
-#PBS -M YOUREMAILHERE
+#PBS -M 
 #PBS -N RunSOAP1
 #PBS -l nodes=2:ppn=4,vmem=128gb,walltime=24:00:00
 

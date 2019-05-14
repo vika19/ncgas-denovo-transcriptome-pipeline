@@ -1,6 +1,6 @@
 #PBS -N TransAb1b
 #PBS -m bea
-#PBS -M YOUREMAILHERE
+#PBS -M 
 #PBS -l nodes=1:ppn=10,walltime=12:00:00,vmem=100gb
 
 #set wd

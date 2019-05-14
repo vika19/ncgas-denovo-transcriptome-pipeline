@@ -1,8 +1,8 @@
 #PBS -k oe 
 #PBS -m abe
-#PBS -M YOUREMAILHERE
+#PBS -M 
 #PBS -N RunVelvet3b
-#PBS -l nodes=1:ppn=2,vmem=400gb,walltime=3:00:00
+#PBS -l nodes=1:ppn=2,vmem=200gb,walltime=3:00:00
 
 ##Move to correct WD
 cd PWDHERE/Velvet

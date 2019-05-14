@@ -1,8 +1,8 @@
 #PBS -k oe
 #PBS -m abe ## Notify when abort, begin, end?
-#PBS -M YOUREMAILHERE
+#PBS -M 
 #PBS -N RunTrinity
-#PBS -l nodes=1:ppn=16,vmem=150gb,walltime=2:00:00:00
+#PBS -l nodes=1:ppn=16,vmem=150gb,walltime=12:00:00
 
 module load trinityrnaseq/2.6.6
 module load bowtie2/intel/2.3.2

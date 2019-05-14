@@ -1,8 +1,8 @@
 #PBS -k oe 
 #PBS -m abe
-#PBS -M YOUREMAILHERE
+#PBS -M 
 #PBS -N RunVelvet2
-#PBS -l nodes=1:ppn=2,vmem=400gb,walltime=3:00:00
+#PBS -l nodes=1:ppn=2,vmem=200gb,walltime=3:00:00
 
 ##Move to correct WD
 cd PWDHERE/Velvet
@@ -16,8 +16,8 @@ right=PWDHERE/input_files/right-norm.fq
 left=PWDHERE/input_files/left-norm.fq
 
 ##run code
-velvetg oases.35 -read_trkg yes -ins_length 260 &
-velvetg oases.45 -read_trkg yes -ins_length 260 &
-velvetg oases.55 -read_trkg yes -ins_length 260 &
+velvetg oases.35 -read_trkg yes -ins_length 400 &
+velvetg oases.45 -read_trkg yes -ins_length 400 &
+velvetg oases.55 -read_trkg yes -ins_length 400 &
 
 wait
