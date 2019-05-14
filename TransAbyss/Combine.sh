@@ -1,3 +1,20 @@
-for f in *final*; do k=`echo ${f%.transabyss.fa-final.fa}`; sed -i "s/>/>TransAb.$k./g" $f; sed -i -E 's/>TransAb.k(..)./>TransAb_k\1_/g' $f; echo "$k done"; done
-cat *final* >> ../final_assemblies/TransAbyss.fa
+k1=35
+k2=45
+k3=55
+k4=65
+k5=75
+k6=85
+
+sed "s/>/>TransAb.$k1./g" $k1.transabyss.fa-final.fa | sed -E "s/>TransAb\.(.{2,3})\./>TransAb_\1_/g" > ../final_assemblies/TransAb.fa
+echo "$k1 Done"
+sed "s/>/>TransAb.$k2./g" $k1.transabyss.fa-final.fa | sed -E "s/>TransAb\.(.{2,3})\./>TransAb_\1_/g" >> ../final_assemblies/TransAb.fa
+echo "$k2 Done"
+sed "s/>/>TransAb.$k3./g" $k1.transabyss.fa-final.fa | sed -E "s/>TransAb\.(.{2,3})\./>TransAb_\1_/g" >> ../final_assemblies/TransAb.fa
+echo "$k3 Done"
+sed "s/>/>TransAb.$k4./g" $k1.transabyss.fa-final.fa | sed -E "s/>TransAb\.(.{2,3})\./>TransAb_\1_/g" >> ../final_assemblies/TransAb.fa
+echo "$k4 Done"
+sed "s/>/>TransAb.$k5./g" $k1.transabyss.fa-final.fa | sed -E "s/>TransAb\.(.{2,3})\./>TransAb_\1_/g" >> ../final_assemblies/TransAb.fa
+echo "$k5 Done"
+sed "s/>/>TransAb.$k6./g" $k1.transabyss.fa-final.fa | sed -E "s/>TransAb\.(.{2,3})\./>TransAb_\1_/g" >> ../final_assemblies/TransAb.fa
+echo "$k6 Done"
 echo "DONE"

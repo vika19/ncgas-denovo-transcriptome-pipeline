@@ -5,14 +5,18 @@
 #PBS -l nodes=1:ppn=4,vmem=128gb,walltime=24:00:00
 
 ##Move to correct WD
-cd PWDHERE/SOAP/
+cd /N/dc2/projects/ncgas/scripts/transcriptome_pipeline/dev/SS_testing/test/SOAP/
 
 ##load modules
 module load soapdenovotrans/1.03
 
+k4=65
+k5=75
+k6=85
+
 ##run code
-SOAPdenovo-Trans-127mer all -s config_file -K 65 -o output65 &
-SOAPdenovo-Trans-127mer all -s config_file -K 75 -o output75 &
-SOAPdenovo-Trans-127mer all -s config_file -K 85 -o output85 &
+SOAPdenovo-Trans-127mer all -s config_file -K $k4 -o output.$k4 &
+SOAPdenovo-Trans-127mer all -s config_file -K $k5 -o output.$k5 &
+SOAPdenovo-Trans-127mer all -s config_file -K $k6 -o output.$k6 &
 
 wait

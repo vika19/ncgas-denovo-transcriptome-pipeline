@@ -5,19 +5,23 @@
 #PBS -l nodes=1:ppn=2,vmem=200gb,walltime=3:00:00
 
 ##Move to correct WD
-cd PWDHERE/Velvet
+cd /N/dc2/projects/ncgas/scripts/transcriptome_pipeline/dev/SS_testing/test/Velvet
 
 ##load modules
 module load velvet/1.2.10
 module load oases/0.2.09
 
 #input define
-right=PWDHERE/input_files/right-norm.fq
-left=PWDHERE/input_files/left-norm.fq
+right=/N/dc2/projects/ncgas/scripts/transcriptome_pipeline/dev/SS_testing/test/input_files/right-norm.fq
+left=/N/dc2/projects/ncgas/scripts/transcriptome_pipeline/dev/SS_testing/test/input_files/left-norm.fq
+
+k1=35
+k2=45
+k3=55
 
 ##run code
-oases oases.35 &
-oases oases.45 &
-oases oases.55 &
+oases oases.$k1 &
+oases oases.$k2 &
+oases oases.$k3 &
 
 wait

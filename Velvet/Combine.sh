@@ -1,20 +1,21 @@
-sed -i 's/>/>Velvet_k35_/g' oases.35/transcripts.fa 
-sed -i 's/\///g' oases.35/transcripts.fa
-echo "k35 done.."
-sed -i 's/>/>Velvet_k45_/g' oases.45/transcripts.fa 
-sed -i 's/\///g' oases.45/transcripts.fa
-echo "k45 done.."
-sed -i 's/>/>Velvet_k55_/g' oases.55/transcripts.fa 
-sed -i 's/\///g' oases.55/transcripts.fa
-echo "k55 done.."
-sed -i 's/>/>Velvet_k65_/g' oases.65/transcripts.fa 
-sed -i 's/\///g' oases.65/transcripts.fa
-echo "k65 done.."
-sed -i 's/>/>Velvet_k75_/g' oases.75/transcripts.fa 
-sed -i 's/\///g' oases.75/transcripts.fa
-echo "k75 done.."
-sed -i 's/>/>Velvet_k85_/g' oases.85/transcripts.fa 
-sed -i 's/\///g' oases.85/transcripts.fa
-echo "k85 done.."
-cat */transcripts.fa > ../final_assemblies/Velvet.fa
-echo "DONE"
+k1=35
+k2=45
+k3=55
+k4=65
+k5=75
+k6=85
+
+
+sed "s/>/>Velvet.$k1./g" oases.$k1/transcripts.fa | sed -E "s/>Velvet\.(.{2,3})\./>Velvet_\1_/g" | sed 's/\///g' > ../final_assemblies/Velvet.fa
+echo "$k1 done.."
+sed "s/>/>Velvet.$k2./g" oases.$k2/transcripts.fa | sed -E "s/>Velvet\.(.{2,3})\./>Velvet_\1_/g" | sed 's/\///g' >> ../final_assemblies/Velvet.fa
+echo "$k2 done.."
+sed "s/>/>Velvet.$k3./g" oases.$k3/transcripts.fa | sed -E "s/>Velvet\.(.{2,3})\./>Velvet_\1_/g" | sed 's/\///g' >> ../final_assemblies/Velvet.fa
+echo "$k3 done.."
+sed "s/>/>Velvet.$k4./g" oases.$k4/transcripts.fa | sed -E "s/>Velvet\.(.{2,3})\./>Velvet_\1_/g" | sed 's/\///g' >> ../final_assemblies/Velvet.fa
+echo "$k4 done.."
+sed "s/>/>Velvet.$k5./g" oases.$k5/transcripts.fa | sed -E "s/>Velvet\.(.{2,3})\./>Velvet_\1_/g" | sed 's/\///g' >> ../final_assemblies/Velvet.fa
+echo "$k5 done.."
+sed "s/>/>Velvet.$k6./g" oases.$k6/transcripts.fa | sed -E "s/>Velvet\.(.{2,3})\./>Velvet_\1_/g" | sed 's/\///g' >> ../final_assemblies/Velvet.fa
+echo "$k6 done.."
+
