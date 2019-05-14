@@ -50,7 +50,6 @@ if [ "$EMAIL" == "FAIL" ]; then
 fi
 
 #Handle Kmers
-#Handle Kmers
 IFS=',' read -r -a array <<< "$K"; 
 if [ "${#array[@]}" != 6 ]; then 
    echo "Please supply exactly 6 kmers."
