@@ -1,15 +1,60 @@
-diff -Naru test_ss/SOAP/RunSOAP1.sh test_paired/SOAP/RunSOAP1.sh
---- test_ss/SOAP/RunSOAP1.sh	2019-05-14 16:36:23.000000000 -0400
-+++ test_paired/SOAP/RunSOAP1.sh	2019-05-14 16:34:05.000000000 -0400
-@@ -10,7 +10,7 @@
- ##load modules
- module load soapdenovotrans/1.03
+diff -Naru test_ss/input_files/RunTrinity.normalize.sh test_paired/input_files/RunTrinity.normalize.sh
+--- test_ss/input_files/RunTrinity.normalize.sh	2019-05-14 15:46:44.000000000 -0400
++++ test_paired/input_files/RunTrinity.normalize.sh	2019-05-14 15:41:43.000000000 -0400
+@@ -9,7 +9,10 @@
  
--source ../setup_files/kmers 
-+source ../setup_files/kmers
+ cd PWDHERE/input_files
  
- ##run code
- SOAPdenovo-Trans-127mer all -s config_file -K $k1 -o output.$k1 &
+-export reads=PWDHERE/input_files/reads.fq
++export right=PWDHERE/input_files/right.fq
++export left=PWDHERE/input_files/left.fq
++
++insilico_read_normalization.pl --seqType fq -JM 100G --max_cov 30 --left $left --right $right --pairs_together --PARALLEL_STATS --CPU 16
++ln -s PWDHERE/input_files/left.norm.fq PWDHERE/input_files/left-norm.fq
++ln -s PWDHERE/input_files/right.norm.fq PWDHERE/input_files/right-norm.fq
+ 
+-insilico_read_normalization.pl --seqType fq -JM 100G --max_cov 30 --single $reads --PARALLEL_STATS --CPU 16
+-ln -s PWDHERE/input_files/single.norm.fq PWDHERE/input_files/reads-norm.fq
+diff -Naru test_ss/RNASpades/RunSpades1b.sh test_paired/RNASpades/RunSpades1b.sh
+--- test_ss/RNASpades/RunSpades1b.sh	2019-05-15 15:55:23.000000000 -0400
++++ test_paired/RNASpades/RunSpades1b.sh	2019-05-15 15:56:22.000000000 -0400
+@@ -14,11 +14,12 @@
+ source ../setup_files/kmers
+ 
+ #reads
+-reads=PWDHERE/input_files/reads-norm.fq
++reads1=PWDHERE/input_files/left-norm.fq
++reads2=PWDHERE/input_files/right-norm.fq
+ 
+ #run
+-rnaspades.py -k $k4 -s $reads -o ./$k4 -t 31 -m 480 &
+-rnaspades.py -k $k5 -s $reads -o ./$k5 -t 31 -m 480 &
+-rnaspades.py -k $k6 -s $reads -o ./$k6 -t 31 -m 480 &
++rnaspades.py -k $k4 -1 $reads1 -2 $reads2 -o ./$k4 -t 31 -m 480 &
++rnaspades.py -k $k5 -1 $reads1 -2 $reads2 -o ./$k5 -t 31 -m 480 &
++rnaspades.py -k $k6 -1 $reads1 -2 $reads2 -o ./$k6 -t 31 -m 480 &
+ 
+ wait
+diff -Naru test_ss/RNASpades/RunSpades1.sh test_paired/RNASpades/RunSpades1.sh
+--- test_ss/RNASpades/RunSpades1.sh	2019-05-15 15:55:16.000000000 -0400
++++ test_paired/RNASpades/RunSpades1.sh	2019-05-15 15:56:27.000000000 -0400
+@@ -14,11 +14,12 @@
+ source ../setup_files/kmers
+ 
+ #reads
+-reads=PWDHERE/input_files/reads-norm.fq
++reads1=PWDHERE/input_files/left-norm.fq
++reads2=PWDHERE/input_files/right-norm.fq
+ 
+ #run
+-rnaspades.py -k $k1 -s $reads -o ./$k1 -t 31 -m 480 &
+-rnaspades.py -k $k2 -s $reads -o ./$k1 -t 31 -m 480 &
+-rnaspades.py -k $k3 -s $reads -o ./$k1 -t 31 -m 480 &
++rnaspades.py -k $k1 -1 $reads1 -2 $reads2 -o ./$k1 -t 31 -m 480 &
++rnaspades.py -k $k2 -1 $reads1 -2 $reads2 -o ./$k2 -t 31 -m 480 &
++rnaspades.py -k $k3 -1 $reads1 -2 $reads2 -o ./$k3 -t 31 -m 480 &
+ 
+ wait
 diff -Naru test_ss/SOAP/config_file test_paired/SOAP/config_file
 --- test_ss/SOAP/config_file	2019-05-14 15:46:45.000000000 -0400
 +++ test_paired/SOAP/config_file	2019-05-14 15:41:43.000000000 -0400
@@ -32,27 +77,18 @@ diff -Naru test_ss/SOAP/config_file test_paired/SOAP/config_file
 +q1=PWDHERE/input_files/left-norm.fq
 +#fastq file for read 2 always follows fastq file for read 1
 +q2=PWDHERE/input_files/right-norm.fq
-diff -Naru test_ss/TransAbyss/RunTransAb1.sh test_paired/TransAbyss/RunTransAb1.sh
---- test_ss/TransAbyss/RunTransAb1.sh	2019-05-14 18:03:09.000000000 -0400
-+++ test_paired/TransAbyss/RunTransAb1.sh	2019-05-14 16:34:34.000000000 -0400
-@@ -13,12 +13,13 @@
- module load blat
+diff -Naru test_ss/SOAP/RunSOAP1.sh test_paired/SOAP/RunSOAP1.sh
+--- test_ss/SOAP/RunSOAP1.sh	2019-05-14 16:36:23.000000000 -0400
++++ test_paired/SOAP/RunSOAP1.sh	2019-05-14 16:34:05.000000000 -0400
+@@ -10,7 +10,7 @@
+ ##load modules
+ module load soapdenovotrans/1.03
  
- #run
--reads=PWDHERE/input_files/reads-norm.fq
-+reads1=PWDHERE/input_files/left-norm.fq
-+reads2=PWDHERE/input_files/right-norm.fq
+-source ../setup_files/kmers 
++source ../setup_files/kmers
  
- OD=`pwd`
- 
--transabyss -k $k1 --se $reads --outdir $OD --name $k1.transabyss.fa --threads 4 -c 12 &
--transabyss -k $k2 --se $reads --outdir $OD --name $k2.transabyss.fa --threads 4 -c 12 &
--transabyss -k $k3 --se $reads --outdir $OD --name $k3.transabyss.fa --threads 4 -c 12 &
-+transabyss -k $k1 --pe $reads1 $reads2 --outdir $OD --name $k1.transabyss.fa --threads 4 -c 12 &
-+transabyss -k $k2 --pe $reads1 $reads2 --outdir $OD --name $k2.transabyss.fa --threads 4 -c 12 &
-+transabyss -k $k3 --pe $reads1 $reads2 --outdir $OD --name $k3.transabyss.fa --threads 4 -c 12 &
- 
- wait
+ ##run code
+ SOAPdenovo-Trans-127mer all -s config_file -K $k1 -o output.$k1 &
 diff -Naru test_ss/TransAbyss/RunTransAb1b.sh test_paired/TransAbyss/RunTransAb1b.sh
 --- test_ss/TransAbyss/RunTransAb1b.sh	2019-05-14 18:03:04.000000000 -0400
 +++ test_paired/TransAbyss/RunTransAb1b.sh	2019-05-14 16:34:40.000000000 -0400
@@ -72,6 +108,27 @@ diff -Naru test_ss/TransAbyss/RunTransAb1b.sh test_paired/TransAbyss/RunTransAb1
 +transabyss -k $k4 --pe $reads1 $reads2 --outdir $OD --name $k4.transabyss.fa --threads 4 -c 12 &
 +transabyss -k $k5 --pe $reads1 $reads2 --outdir $OD --name $k5.transabyss.fa --threads 4 -c 12 &
 +transabyss -k $k6 --pe $reads1 $reads2 --outdir $OD --name $k6.transabyss.fa --threads 4 -c 12 &
+ 
+ wait
+diff -Naru test_ss/TransAbyss/RunTransAb1.sh test_paired/TransAbyss/RunTransAb1.sh
+--- test_ss/TransAbyss/RunTransAb1.sh	2019-05-14 18:03:09.000000000 -0400
++++ test_paired/TransAbyss/RunTransAb1.sh	2019-05-14 16:34:34.000000000 -0400
+@@ -13,12 +13,13 @@
+ module load blat
+ 
+ #run
+-reads=PWDHERE/input_files/reads-norm.fq
++reads1=PWDHERE/input_files/left-norm.fq
++reads2=PWDHERE/input_files/right-norm.fq
+ 
+ OD=`pwd`
+ 
+-transabyss -k $k1 --se $reads --outdir $OD --name $k1.transabyss.fa --threads 4 -c 12 &
+-transabyss -k $k2 --se $reads --outdir $OD --name $k2.transabyss.fa --threads 4 -c 12 &
+-transabyss -k $k3 --se $reads --outdir $OD --name $k3.transabyss.fa --threads 4 -c 12 &
++transabyss -k $k1 --pe $reads1 $reads2 --outdir $OD --name $k1.transabyss.fa --threads 4 -c 12 &
++transabyss -k $k2 --pe $reads1 $reads2 --outdir $OD --name $k2.transabyss.fa --threads 4 -c 12 &
++transabyss -k $k3 --pe $reads1 $reads2 --outdir $OD --name $k3.transabyss.fa --threads 4 -c 12 &
  
  wait
 diff -Naru test_ss/Trinity/RunTrinity.sh test_paired/Trinity/RunTrinity.sh
@@ -110,26 +167,6 @@ diff -Naru test_ss/Velvet/README test_paired/Velvet/README
  
  Velvet Manual: https://www.ebi.ac.uk/~zerbino/velvet/Manual.pdf
  Velvet Licence: https://www.gnu.org/licenses/gpl-2.0-standalone.html
-diff -Naru test_ss/Velvet/RunVelvet1.sh test_paired/Velvet/RunVelvet1.sh
---- test_ss/Velvet/RunVelvet1.sh	2019-05-14 16:37:13.000000000 -0400
-+++ test_paired/Velvet/RunVelvet1.sh	2019-05-14 16:34:59.000000000 -0400
-@@ -14,11 +14,12 @@
- module load oases/0.2.09
- 
- #input define
--reads=PWDHERE/input_files/reads-norm.fq
-+right=PWDHERE/input_files/right-norm.fq
-+left=PWDHERE/input_files/left-norm.fq
- 
- ##run code
--velveth oases.$k1 $k1 -short -fastq $reads &
--velveth oases.$k2 $k2 -short -fastq $reads &
--velveth oases.$k3 $k3 -short -fastq $reads &
-+velveth oases.$k1 $k1 -shortPaired -fastq -separate $left $right &
-+velveth oases.$k2 $k2 -shortPaired -fastq -separate $left $right &
-+velveth oases.$k3 $k3 -shortPaired -fastq -separate $left $right &
- 
- wait
 diff -Naru test_ss/Velvet/RunVelvet1b.sh test_paired/Velvet/RunVelvet1b.sh
 --- test_ss/Velvet/RunVelvet1b.sh	2019-05-14 17:58:55.000000000 -0400
 +++ test_paired/Velvet/RunVelvet1b.sh	2019-05-14 17:59:30.000000000 -0400
@@ -150,9 +187,9 @@ diff -Naru test_ss/Velvet/RunVelvet1b.sh test_paired/Velvet/RunVelvet1b.sh
 +velveth oases.$k6 $k6 -shortPaired -fastq -separate $left $right &
  
  wait
-diff -Naru test_ss/Velvet/RunVelvet2.sh test_paired/Velvet/RunVelvet2.sh
---- test_ss/Velvet/RunVelvet2.sh	2019-05-14 16:37:25.000000000 -0400
-+++ test_paired/Velvet/RunVelvet2.sh	2019-05-14 16:35:12.000000000 -0400
+diff -Naru test_ss/Velvet/RunVelvet1.sh test_paired/Velvet/RunVelvet1.sh
+--- test_ss/Velvet/RunVelvet1.sh	2019-05-14 16:37:13.000000000 -0400
++++ test_paired/Velvet/RunVelvet1.sh	2019-05-14 16:34:59.000000000 -0400
 @@ -14,11 +14,12 @@
  module load oases/0.2.09
  
@@ -162,12 +199,12 @@ diff -Naru test_ss/Velvet/RunVelvet2.sh test_paired/Velvet/RunVelvet2.sh
 +left=PWDHERE/input_files/left-norm.fq
  
  ##run code
--velvetg oases.$k1 -read_trkg yes &
--velvetg oases.$k1 -read_trkg yes &
--velvetg oases.$k1 -read_trkg yes &
-+velvetg oases.$k1 -read_trkg yes -ins_length 400 &
-+velvetg oases.$k2 -read_trkg yes -ins_length 400 &
-+velvetg oases.$k3 -read_trkg yes -ins_length 400 &
+-velveth oases.$k1 $k1 -short -fastq $reads &
+-velveth oases.$k2 $k2 -short -fastq $reads &
+-velveth oases.$k3 $k3 -short -fastq $reads &
++velveth oases.$k1 $k1 -shortPaired -fastq -separate $left $right &
++velveth oases.$k2 $k2 -shortPaired -fastq -separate $left $right &
++velveth oases.$k3 $k3 -shortPaired -fastq -separate $left $right &
  
  wait
 diff -Naru test_ss/Velvet/RunVelvet2b.sh test_paired/Velvet/RunVelvet2b.sh
@@ -190,10 +227,10 @@ diff -Naru test_ss/Velvet/RunVelvet2b.sh test_paired/Velvet/RunVelvet2b.sh
 +velvetg oases.$k6 -read_trkg yes -ins_length 400 &
  
  wait
-diff -Naru test_ss/Velvet/RunVelvet3.sh test_paired/Velvet/RunVelvet3.sh
---- test_ss/Velvet/RunVelvet3.sh	2019-05-14 16:37:41.000000000 -0400
-+++ test_paired/Velvet/RunVelvet3.sh	2019-05-14 16:35:25.000000000 -0400
-@@ -14,7 +14,8 @@
+diff -Naru test_ss/Velvet/RunVelvet2.sh test_paired/Velvet/RunVelvet2.sh
+--- test_ss/Velvet/RunVelvet2.sh	2019-05-14 16:37:25.000000000 -0400
++++ test_paired/Velvet/RunVelvet2.sh	2019-05-14 16:35:12.000000000 -0400
+@@ -14,11 +14,12 @@
  module load oases/0.2.09
  
  #input define
@@ -202,7 +239,14 @@ diff -Naru test_ss/Velvet/RunVelvet3.sh test_paired/Velvet/RunVelvet3.sh
 +left=PWDHERE/input_files/left-norm.fq
  
  ##run code
- oases oases.$k1 &
+-velvetg oases.$k1 -read_trkg yes &
+-velvetg oases.$k1 -read_trkg yes &
+-velvetg oases.$k1 -read_trkg yes &
++velvetg oases.$k1 -read_trkg yes -ins_length 400 &
++velvetg oases.$k2 -read_trkg yes -ins_length 400 &
++velvetg oases.$k3 -read_trkg yes -ins_length 400 &
+ 
+ wait
 diff -Naru test_ss/Velvet/RunVelvet3b.sh test_paired/Velvet/RunVelvet3b.sh
 --- test_ss/Velvet/RunVelvet3b.sh	2019-05-14 17:59:11.000000000 -0400
 +++ test_paired/Velvet/RunVelvet3b.sh	2019-05-14 17:59:19.000000000 -0400
@@ -216,20 +260,16 @@ diff -Naru test_ss/Velvet/RunVelvet3b.sh test_paired/Velvet/RunVelvet3b.sh
  
  ##run code
  oases oases.$k4 &
-diff -Naru test_ss/input_files/RunTrinity.normalize.sh test_paired/input_files/RunTrinity.normalize.sh
---- test_ss/input_files/RunTrinity.normalize.sh	2019-05-14 15:46:44.000000000 -0400
-+++ test_paired/input_files/RunTrinity.normalize.sh	2019-05-14 15:41:43.000000000 -0400
-@@ -9,7 +9,10 @@
+diff -Naru test_ss/Velvet/RunVelvet3.sh test_paired/Velvet/RunVelvet3.sh
+--- test_ss/Velvet/RunVelvet3.sh	2019-05-14 16:37:41.000000000 -0400
++++ test_paired/Velvet/RunVelvet3.sh	2019-05-14 16:35:25.000000000 -0400
+@@ -14,7 +14,8 @@
+ module load oases/0.2.09
  
- cd PWDHERE/input_files
+ #input define
+-reads=PWDHERE/input_files/reads-norm.fq
++right=PWDHERE/input_files/right-norm.fq
++left=PWDHERE/input_files/left-norm.fq
  
--export reads=PWDHERE/input_files/reads.fq
-+export right=PWDHERE/input_files/right.fq
-+export left=PWDHERE/input_files/left.fq
-+
-+insilico_read_normalization.pl --seqType fq -JM 100G --max_cov 30 --left $left --right $right --pairs_together --PARALLEL_STATS --CPU 16
-+ln -s PWDHERE/input_files/left.norm.fq PWDHERE/input_files/left-norm.fq
-+ln -s PWDHERE/input_files/right.norm.fq PWDHERE/input_files/right-norm.fq
- 
--insilico_read_normalization.pl --seqType fq -JM 100G --max_cov 30 --single $reads --PARALLEL_STATS --CPU 16
--ln -s PWDHERE/input_files/single.norm.fq PWDHERE/input_files/reads-norm.fq
+ ##run code
+ oases oases.$k1 &
